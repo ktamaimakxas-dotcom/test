@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Desk</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-labelledby="app-title">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Focus Desk</p>
+            <h1 id="app-title">今日やること</h1>
+          </div>
+          <div class="date-card" aria-live="polite">
+            <span id="todayLabel">Today</span>
+            <strong id="taskCount">0件</strong>
+          </div>
+        </header>
+
+        <section class="summary" aria-label="進捗">
+          <div class="progress-wrap">
+            <svg class="progress-ring" viewBox="0 0 120 120" role="img" aria-labelledby="progressTitle">
+              <title id="progressTitle">完了率</title>
+              <circle class="ring-bg" cx="60" cy="60" r="48"></circle>
+              <circle id="progressRing" class="ring-value" cx="60" cy="60" r="48"></circle>
+            </svg>
+            <div class="progress-copy">
+              <span id="progressValue">0%</span>
+              <p>完了</p>
+            </div>
+          </div>
+          <div class="summary-grid">
+            <div>
+              <span id="activeCount">0</span>
+              <p>未完了</p>
+            </div>
+            <div>
+              <span id="doneCount">0</span>
+              <p>完了済み</p>
+            </div>
+          </div>
+        </section>
+
+        <form id="taskForm" class="task-form">
+          <label for="taskInput">タスクを追加</label>
+          <div class="input-row">
+            <input id="taskInput" type="text" placeholder="例: READMEを書く" autocomplete="off" />
+            <button type="submit" aria-label="タスクを追加">+</button>
+          </div>
+        </form>
+
+        <div class="toolbar" aria-label="表示切り替え">
+          <button class="filter-button active" type="button" data-filter="all">すべて</button>
+          <button class="filter-button" type="button" data-filter="active">未完了</button>
+          <button class="filter-button" type="button" data-filter="done">完了</button>
+          <button id="clearDone" class="clear-button" type="button">完了を削除</button>
+        </div>
+
+        <ul id="taskList" class="task-list" aria-live="polite"></ul>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
