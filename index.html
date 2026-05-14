@@ -34,8 +34,12 @@
           </div>
           <div class="summary-grid">
             <div>
-              <span id="activeCount">0</span>
-              <p>未完了</p>
+              <span id="todoCount">0</span>
+              <p>未着手</p>
+            </div>
+            <div>
+              <span id="doingCount">0</span>
+              <p>進行中</p>
             </div>
             <div>
               <span id="doneCount">0</span>
@@ -48,6 +52,12 @@
           <label for="taskInput">タスクを追加</label>
           <div class="input-row">
             <input id="taskInput" type="text" placeholder="例: READMEを書く" autocomplete="off" />
+            <input id="dueInput" type="date" aria-label="期限" />
+            <select id="statusInput" aria-label="ステータス">
+              <option value="todo">未着手</option>
+              <option value="doing">進行中</option>
+              <option value="done">完了</option>
+            </select>
             <button type="submit" aria-label="タスクを追加">+</button>
           </div>
         </form>

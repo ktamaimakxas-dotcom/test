@@ -7,6 +7,9 @@
   --line: #dfe6de;
   --accent: #28715e;
   --accent-strong: #1d5949;
+  --info: #2f5f98;
+  --done: #28715e;
+  --idle: #7a6b39;
   --warn: #b5603a;
   --shadow: 0 18px 50px rgba(39, 64, 53, 0.12);
 }
@@ -27,7 +30,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -154,7 +158,7 @@ h1 {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .summary-grid div {
@@ -187,11 +191,15 @@ h1 {
 
 .input-row {
   display: grid;
-  grid-template-columns: 1fr 52px;
+  grid-template-columns: minmax(180px, 1fr) 160px 132px 52px;
   gap: 10px;
 }
 
-.input-row input {
+.input-row input,
+.input-row select,
+.edit-form input,
+.edit-form select,
+.status-select {
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -201,7 +209,11 @@ h1 {
   padding: 14px 16px;
 }
 
-.input-row input:focus {
+.input-row input:focus,
+.input-row select:focus,
+.edit-form input:focus,
+.edit-form select:focus,
+.status-select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(40, 113, 94, 0.12);
 }
@@ -268,7 +280,7 @@ h1 {
 
 .task-item {
   display: grid;
-  grid-template-columns: 44px 1fr 44px;
+  grid-template-columns: minmax(0, 1fr) 132px 104px;
   align-items: center;
   gap: 10px;
   min-height: 58px;
@@ -278,11 +290,11 @@ h1 {
   padding: 7px;
 }
 
-.task-toggle {
-  width: 28px;
-  height: 28px;
-  margin: 0 auto;
-  accent-color: var(--accent);
+.task-main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding-left: 8px;
 }
 
 .task-title {
@@ -295,12 +307,90 @@ h1 {
   text-decoration: line-through;
 }
 
-.task-delete {
-  width: 36px;
-  height: 36px;
+.due-date {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.due-date.overdue {
+  color: var(--warn);
+}
+
+.status-select {
+  width: 100%;
+  padding: 10px 12px;
+  font-weight: 800;
+}
+
+.status-todo {
+  color: var(--idle);
+}
+
+.status-doing {
+  color: var(--info);
+}
+
+.status-done {
+  color: var(--done);
+}
+
+.task-actions,
+.edit-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.task-edit,
+.task-delete,
+.edit-actions button {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.task-edit,
+.edit-actions button[type="submit"] {
+  min-width: 58px;
+  min-height: 36px;
+  background: #e8f0f5;
+  color: var(--info);
+}
+
+.task-edit:hover,
+.edit-actions button[type="submit"]:hover {
+  background: #d7e7f2;
+}
+
+.task-delete,
+.edit-actions button[type="button"] {
+  min-width: 36px;
+  min-height: 36px;
   background: #f6ebe6;
   color: var(--warn);
-  font-weight: 850;
+}
+
+.task-delete:hover,
+.edit-actions button[type="button"]:hover {
+  background: #f0d9ce;
+}
+
+.task-item.editing {
+  grid-template-columns: 1fr;
+}
+
+.edit-form {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) 160px 132px 126px;
+  gap: 10px;
+  width: 100%;
+}
+
+.edit-form input,
+.edit-form select {
+  padding: 10px 12px;
 }
 
 .empty-state {
@@ -340,5 +430,25 @@ h1 {
 
   .toolbar .clear-button {
     margin-left: 0;
+  }
+
+  .input-row,
+  .task-item,
+  .edit-form {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid div + div {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .task-actions,
+  .edit-actions {
+    justify-content: flex-start;
   }
 }
